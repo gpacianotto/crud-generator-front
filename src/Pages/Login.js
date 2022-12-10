@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { 
     Container, 
     Row, 
@@ -9,6 +10,10 @@ import {
     Button
 } from "reactstrap";
 
+import MainColors from "../Assets/Colors/MainColors";
+
+import fonts from "../Assets/Fonts/Fonts";
+
 export default function Login() {
 
 
@@ -16,31 +21,31 @@ export default function Login() {
 
         <Container fluid>
         
-        <Row style={{backgroundColor: "#a162f7", color: "#fefff1", height: "100vh"}}>
+        <Row className="" style={{backgroundColor: MainColors.primary, color: MainColors.fourth, height: "100vh"}}>
 
-            <Col md="3">
+            <Col md="4">
 
             </Col>
-            <Col md="6">
+            <Col md="4">
                 <Row>
                     <Col className="text-center mt-3" xl="12">
                     
-                        <h3 style={{fontFamily: "Muli", fontWeight: '700'}}>Bem Vindo ao CRUD Generator!</h3>
+                        <h3 style={{fontFamily: fonts.title, fontWeight: '700'}}>Bem Vindo ao CRUD Generator!</h3>
                     </Col>
                 </Row>
 
-                <Row className="mt-4 mb-4" style={{backgroundColor: "#fefff1", color: "black", borderRadius: "5px"}}>
+                <Row className="mt-4 mb-4" style={{backgroundColor: MainColors.fourth, color: "black", borderRadius: "5px"}}>
 
                     <Col className="mt-3" xl="12">
                         <Row>
                             <Col className="text-center" xl="12">
-                                <h4 style={{fontFamily: "Muli", fontWeight: '700'}}>Faça seu login aqui!</h4>
+                                <h4 style={{fontFamily: fonts.title, fontWeight: '700'}}>Faça seu login aqui!</h4>
                             </Col>
                         </Row>
                     </Col>
                     
                     <Col xl="12">
-                        <Form style={{fontFamily: "Muli"}}>
+                        <Form style={{fontFamily: fonts.title}}>
                             <FormGroup>
                                 <Label for="exampleEmail">
                                 Email
@@ -66,7 +71,7 @@ export default function Login() {
 
                             <Row className="text-center">
                                 <Col>
-                                    <Button  className="mt-1 mb-3" style={{backgroundColor: "#a162f7", color: "#fefff1"}}>
+                                    <Button  className="mt-1 mb-3" style={{backgroundColor: MainColors.primary, color: MainColors.fourth}}>
                                         Login
                                     </Button>
                                 </Col>
@@ -77,9 +82,15 @@ export default function Login() {
 
                     
                 </Row>
+
+                <Row>
+                    <Col className="text-end" xl="12" >
+                        <Link to="/sign-up"style={{color: MainColors.fourth}} >Crie sua Conta!</Link>
+                    </Col>
+                </Row>
             </Col>
 
-            <Col md="3">
+            <Col md="4">
 
             </Col>
 
