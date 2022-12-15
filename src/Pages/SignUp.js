@@ -3,6 +3,7 @@ import { Col, Row, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import Swal from "sweetalert2";
 import MainColors from "../Assets/Colors/MainColors";
 import fonts from "../Assets/Fonts/Fonts";
+import SignUpApi from "../Services/SignUpApi";
 import newAccount from "../Services/SignUpApi";
 
 
@@ -13,6 +14,8 @@ export default function SignUp(props) {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [systemToken, setSystemToken] = useState("");
+
+    const signUpApi = SignUpApi.getInstance();
 
 
     return <>
@@ -76,6 +79,15 @@ export default function SignUp(props) {
                                 id="password-confirm"
                                 placeholder="Confirmar Senha"
                                 type="password"
+                                style={(password === confirmPassword) ? 
+                                
+                                    {border: "2px solid green"}
+
+                                    :
+
+                                    {border: "2px solid red"}
+
+                                }
                                 onChange={(e) => {setConfirmPassword(e.target.value)}}
                                 />
                             </FormGroup>
@@ -124,41 +136,64 @@ export default function SignUp(props) {
                                             email: email,
                                             password: password,
                                             systemToken: systemToken,
-                                            type: type,
+                                            role: type,
                                         }
 
-                                        await newAccount(data).then((res) => {
+                                        if(password === confirmPassword)
+                                        {
+                                            await signUpApi.newAccount(data).then((res) => {
 
-                                            const dataRes = res.data;
-
-                                            const event = dataRes?.event;
-
-                                            if(!!event && event == "error")
-                                            {
+                                                const dataRes = res.data;
+    
+                                                const event = dataRes?.event;
+    
+                                                if(!!event && event == "error")
+                                                {
+                                                    Swal.fire(
+                                                        'Erro!',
+                                                        'Retorno da api: \n' + JSON.stringify(dataRes.message),
+                                                        'error'
+                                                    ).then(() => {
+                                                        return;
+                                                    })
+                                                }
+                                                if(!!res)
+                                                {
+                                                    Swal.fire(
+                                                        'Erro!',
+                                                        'Houve algum erro inesperado, tente novamente',
+                                                        'error'
+                                                    ).then(() => {
+                                                        return;
+                                                    })
+                                                }
+                                                else {
+                                                    Swal.fire(
+                                                        'Usuário Cadastrado',
+                                                        'Seu usuário do tipo ' + data.role + ' foi cadastrado com Sucesso!',
+                                                        'success'
+                                                    )
+                                                }
+    
+                                                
+                                                console.log(res);
+                                            }).catch((err) => {
                                                 Swal.fire(
                                                     'Erro!',
-                                                    'Retorno da api: \n' + JSON.stringify(dataRes.message),
+                                                    'Retorno da api: \n' + JSON.stringify(err),
                                                     'error'
                                                 )
-                                            }
-                                            else {
-                                                Swal.fire(
-                                                    'Usuário Cadastrado',
-                                                    'Seu usuário do tipo ' + data.type + ' foi cadastrado com Sucesso!',
-                                                    'success'
-                                                )
-                                            }
-
-                                            
-                                            console.log(res);
-                                        }).catch((err) => {
+                                                console.log(err);
+                                            });
+                                        }
+                                        else{
                                             Swal.fire(
                                                 'Erro!',
-                                                'Retorno da api: \n' + JSON.stringify(err),
+                                                'Sua senha não confere, digite novamente!',
                                                 'error'
                                             )
-                                            console.log(err);
-                                        });
+                                        }
+                                       
 
                                         
 

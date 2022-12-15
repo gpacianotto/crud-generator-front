@@ -1,33 +1,49 @@
 import axios from "axios";
-const { default: Configs } = require("./Configs");
+import Configs from "./Configs";
 
-const apiURL = Configs.getInstance().getServerURL();
-
-export default async function newAccount(data) {
-    const {email, password, systemToken, type} = data;
-
-    let response;
-
-    if(!!email && !!password && !!systemToken && !!type)
-    {
-        console.log(apiURL);
-        await axios.post((apiURL + "/sign-up"), data, {
-            headers: {
-                'content-type': 'text/json',
-                'systemToken': systemToken
-            }
-        }).then((res) => {
-            response = res;
-        }).catch((err) => {
-            response = err;
-        });
-    }
-    else{
-        return false;
-    }
+export default class SignUpApi{
     
-    return response;
+    static instance;
+
+    static getInstance(){
+        if(SignUpApi.instance)
+        {
+            return SignUpApi.instance;
+        }
+        else {SignUpApi.instance = new SignUpApi();}
+        return SignUpApi.instance;
+    }
+
+    constructor() {
+        this.apiURL = Configs.getInstance().getServerURL();
+    }
+
+    async newAccount(data) {
+        const {email, password, systemToken, role} = data;
+    
+        let response;
+    
+        if(!!email && !!password && !!systemToken && !!role)
+        {
+            console.log(data);
+            await axios.post((this.apiURL + "/sign-up"), data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'systemToken': systemToken
+                }
+            }).then((res) => {
+                response = res;
+            }).catch((err) => {
+                response = err;
+            });
+        }
+        else{
+            return false;
+        }
+        
+        return response;
+    }
+        
+
 }
-
-
 
