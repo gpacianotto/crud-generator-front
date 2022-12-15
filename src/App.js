@@ -15,11 +15,14 @@ import ModalConfig from './Components/ModalConfig';
 import TestingApi from './Services/TestingApi';
 import Swal from 'sweetalert2';
 import SystemApi from './Services/SystemApi';
+import Home from './Pages/Home';
+import Sidebar from './Components/Sidebar';
 
 
 function App() {
 
   const [showModal, setShowModal] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const systemApi = SystemApi.getInstance();
   const testingApi = TestingApi.getInstance();
@@ -109,8 +112,11 @@ function App() {
     <Router>
       <ModalConfig showModal={showModal} setShowModal={setShowModal}/>
 
-      
 
+
+      {(loggedIn) &&  <Sidebar/>}
+      
+      
       <Button style={{
         position: "fixed",
         bottom: "2%",
@@ -120,9 +126,10 @@ function App() {
       >
         Config
       </Button>
-      <Routes>
-        <Route path="/" element={<Login/>}/>
+      <Routes id="routes">
+        <Route path="/" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
         <Route path='/sign-up' element ={<SignUp/>}/>
+        <Route path="/home" element={<Home/>}/>
       </Routes>
       
       {/* <Route path="/regex" element={<Regex/>}/>

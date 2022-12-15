@@ -23,4 +23,15 @@ export default class Configs{
     {
         this.serverURL = url;
     }
+
+    getRootSystemToken()
+    {
+        return localStorage.getItem('rootSystemToken');
+    }
+
+    setRootSystemToken(token)
+    {
+        localStorage.setItem('rootSystemToken', token);
+    }
+
 }

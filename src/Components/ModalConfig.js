@@ -7,6 +7,7 @@ export default function ModalConfig(props) {
     const {showModal, setShowModal} = props;
     const configs = Configs.getInstance();
     const [url, setUrl] = useState(configs.getServerURL());
+    const [rootToken, setRootToken] = useState(configs.getRootSystemToken());
     
     const toggle = () => setShowModal(!showModal);
     return <>
@@ -23,15 +24,27 @@ export default function ModalConfig(props) {
                     <Form >
                         <FormGroup>
                             <Label for="email">
-                            URL
+                                URL
                             </Label>
                             <Input
                             value={url}
-                            id="email"
-                            name="email"
+                            id="url"
                             placeholder="ex: http://localhost:3000"
-                            type="email"
+                            type="text"
                             onChange={(e) => {setUrl(e.target.value)}}
+                            />
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label for="email">
+                                Token do Sistema Root
+                            </Label>
+                            <Input
+                            value={rootToken}
+                            id="token"
+                            placeholder="Token"
+                            type="password"
+                            onChange={(e) => {setRootToken(e.target.value)}}
                             />
                         </FormGroup>
                     </Form>
@@ -40,7 +53,11 @@ export default function ModalConfig(props) {
                 <Col className="text-end" xl="12">
                     <Button 
                     style={{backgroundColor: MainColors.primary}}
-                    onClick={() => {configs.setServerURL(url)}}
+                    onClick={() => {
+                        configs.setServerURL(url);
+                        configs.setRootSystemToken(rootToken);
+                        toggle();
+                    }}
                     >
                         Salvar
                     </Button>

@@ -22,7 +22,7 @@ export default class SignUpApi{
         const {email, password, systemToken, role} = data;
     
         let response;
-    
+        console.log(data);
         if(!!email && !!password && !!systemToken && !!role)
         {
             console.log(data);

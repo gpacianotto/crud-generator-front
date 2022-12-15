@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { 
     Container, 
     Row, 
@@ -9,13 +10,25 @@ import {
     Label,
     Button
 } from "reactstrap";
+import Swal from "sweetalert2";
 
 import MainColors from "../Assets/Colors/MainColors";
 
 import fonts from "../Assets/Fonts/Fonts";
+import SignInApi from "../Services/SignInApi";
+import UserDataService from "../Services/UserDataService";
 
-export default function Login() {
+export default function Login(props) {
 
+    const {loggedIn, setLoggedIn} = props;
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const navigate = useNavigate();
+
+    const signInApi = SignInApi.getInstance();
+    const userDataService = UserDataService.getInstance();
 
     return <>
 
@@ -55,6 +68,7 @@ export default function Login() {
                                 name="email"
                                 placeholder="Email"
                                 type="email"
+                                onChange={(e) => {setEmail(e.target.value)}}
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -66,12 +80,72 @@ export default function Login() {
                                 name="password"
                                 placeholder="Senha"
                                 type="password"
+                                onChange={(e) => {setPassword(e.target.value)}}
                                 />
                             </FormGroup>
 
                             <Row className="text-center">
                                 <Col>
-                                    <Button  className="mt-1 mb-3" style={{backgroundColor: MainColors.primary, color: MainColors.fourth}}>
+                                    <Button  
+                                    className="mt-1 mb-3" 
+                                    style={{backgroundColor: MainColors.primary, color: MainColors.fourth}}
+                                    onClick={async () => {
+
+                                        const data = {
+                                            email: email,
+                                            password: password
+                                        }
+
+                                        await signInApi.login(data).then((response) => {
+                                            if(response.status === "error")
+                                            {  
+                                                console.log("erro: ",response);
+                                                
+                                                Swal.fire(
+                                                    'Erro',
+                                                    'Houve um Erro ao tentar fazer o Login <br/>' +
+                                                    'Mensagem do servidor: ' + JSON.stringify(response.response),
+                                                    'error'
+                                                )
+                                            }
+                                            if(response.status === "success")
+                                            {
+                                                console.log("response", response)
+                                                const event = response.response?.data?.event;
+                                                const message = response.response?.data?.message;
+
+                                                if(!event && !message)
+                                                {
+                                                    Swal.fire(
+                                                        'Erro',
+                                                        'Houve um Erro ao tentar fazer o Login <br/>' +
+                                                        'Mensagem do servidor: ' + JSON.stringify(response.response),
+                                                        'error'
+                                                    ).then(() => {
+                                                        return;
+                                                    })
+                                                }
+                                                if(event === 'error')
+                                                {
+                                                    Swal.fire(
+                                                        'Erro',
+                                                        'Houve um Erro ao tentar fazer o Login <br/>' +
+                                                        'Mensagem do servidor: ' + message,
+                                                        'error'
+                                                    ).then(() => {
+                                                        return;
+                                                    })
+                                                }
+                                                if(event === 'success')
+                                                {
+                                                    userDataService.saveUser(response.response.data.data);
+                                                    setLoggedIn(true);
+                                                    navigate('/home');
+                                                }
+                                            }
+                                        })
+                                    }}
+                                    >
                                         Login
                                     </Button>
                                 </Col>

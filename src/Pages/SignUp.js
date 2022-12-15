@@ -146,7 +146,8 @@ export default function SignUp(props) {
                                                 const dataRes = res.data;
     
                                                 const event = dataRes?.event;
-    
+                                                console.log("event: ", event);
+                                                console.log("dataREs: ", dataRes);
                                                 if(!!event && event == "error")
                                                 {
                                                     Swal.fire(
@@ -156,16 +157,19 @@ export default function SignUp(props) {
                                                     ).then(() => {
                                                         return;
                                                     })
+                                                    return;
                                                 }
-                                                if(!!res)
+                                                if(!res)
                                                 {
                                                     Swal.fire(
                                                         'Erro!',
-                                                        'Houve algum erro inesperado, tente novamente',
+                                                        'Certifique-se de que inseriu todos os dados requeridos',
                                                         'error'
                                                     ).then(() => {
                                                         return;
                                                     })
+
+                                                    return;
                                                 }
                                                 else {
                                                     Swal.fire(
