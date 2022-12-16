@@ -146,8 +146,7 @@ export default function SignUp(props) {
                                                 const dataRes = res.data;
     
                                                 const event = dataRes?.event;
-                                                console.log("event: ", event);
-                                                console.log("dataREs: ", dataRes);
+
                                                 if(!!event && event == "error")
                                                 {
                                                     Swal.fire(
@@ -180,14 +179,14 @@ export default function SignUp(props) {
                                                 }
     
                                                 
-                                                console.log(res);
+
                                             }).catch((err) => {
                                                 Swal.fire(
                                                     'Erro!',
                                                     'Retorno da api: \n' + JSON.stringify(err),
                                                     'error'
                                                 )
-                                                console.log(err);
+
                                             });
                                         }
                                         else{

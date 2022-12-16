@@ -22,10 +22,9 @@ export default class SignUpApi{
         const {email, password, systemToken, role} = data;
     
         let response;
-        console.log(data);
+
         if(!!email && !!password && !!systemToken && !!role)
         {
-            console.log(data);
             await axios.post((this.apiURL + "/sign-up"), data, {
                 headers: {
                     'Content-Type': 'application/json',

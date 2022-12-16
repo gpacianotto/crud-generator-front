@@ -45,8 +45,7 @@ export default class TestingApi {
 
         await axios.get(this.getApiURL() + "/root-system-exists").then((res) => {
             const answer = res?.data?.doesRootExists;
-            console.log(res);
-            console.log(answer);
+
             if(answer === true || answer === false)
             {
                 response = answer;
@@ -56,7 +55,6 @@ export default class TestingApi {
             }
             
         }).catch((err) => {
-            console.log(err);
             response = null;
         })
 

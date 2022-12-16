@@ -27,4 +27,36 @@ export default class UserDataService{
     {
         return JSON.parse(localStorage.getItem('user'));
     }
+
+    clearUser()
+    {
+        localStorage.removeItem('user');
+    }
+
+    isSessionExpired() {
+
+        const info = this.loadUser();
+
+        if(!info)
+        {
+            return true;
+        }
+
+        const session = info?.session;
+        
+        const expiresIn = session?.expiresIn;
+
+        console.log(expiresIn);
+      
+        const expiresDate = new Date(expiresIn);
+        const now = new Date();
+      
+        if(expiresDate <= now)
+        {
+          return true;
+        }
+      
+        return false;
+      
+    }
 }

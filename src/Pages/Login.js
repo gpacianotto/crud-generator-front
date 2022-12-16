@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { 
     Container, 
@@ -24,11 +24,31 @@ export default function Login(props) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const signInApi = SignInApi.getInstance();
+    const userDataService = UserDataService.getInstance();
 
     const navigate = useNavigate();
 
-    const signInApi = SignInApi.getInstance();
-    const userDataService = UserDataService.getInstance();
+    useEffect(() => {
+        
+        
+
+        if(!!userDataService.isSessionExpired())
+        {
+            console.log("expirou!");
+            userDataService.clearUser();
+            setLoggedIn(false);
+            
+        }
+        else{
+            console.log("não expirou!");
+            setLoggedIn(true);
+            navigate('/home');
+        }
+        
+    }, [])
+
+    
 
     return <>
 
@@ -99,7 +119,6 @@ export default function Login(props) {
                                         await signInApi.login(data).then((response) => {
                                             if(response.status === "error")
                                             {  
-                                                console.log("erro: ",response);
                                                 
                                                 Swal.fire(
                                                     'Erro',
@@ -110,7 +129,6 @@ export default function Login(props) {
                                             }
                                             if(response.status === "success")
                                             {
-                                                console.log("response", response)
                                                 const event = response.response?.data?.event;
                                                 const message = response.response?.data?.message;
 

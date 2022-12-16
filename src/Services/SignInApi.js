@@ -22,7 +22,7 @@ export default class SignInApi{
     async login(data) {
         const rootSystemToken = this.configs.getRootSystemToken();
 
-        console.log("token: ",rootSystemToken);
+
 
         let response;
 

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { 
     Container, 
     Row, 
@@ -21,8 +23,18 @@ export default function Home() {
 
     const info = userDataService.loadUser();
 
-    console.log(info);
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        if(!!userDataService.isSessionExpired())
+        {
+            console.log("expirou!");
+            userDataService.clearUser();
+            navigate('/');
+            
+        }
+        
+    }, [])
 
     return <>
     

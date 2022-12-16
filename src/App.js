@@ -5,7 +5,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
+  Link,
 } from "react-router-dom";
 import { Row, Col, Button } from 'reactstrap';
 import Login from './Pages/Login';
@@ -17,15 +17,18 @@ import Swal from 'sweetalert2';
 import SystemApi from './Services/SystemApi';
 import Home from './Pages/Home';
 import Sidebar from './Components/Sidebar';
+import UserDataService from './Services/UserDataService';
+
+
 
 
 function App() {
-
   const [showModal, setShowModal] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState();
 
   const systemApi = SystemApi.getInstance();
   const testingApi = TestingApi.getInstance();
+  const userDataService = UserDataService.getInstance();
 
   useEffect(()=> {
 
@@ -41,7 +44,30 @@ function App() {
           ).then(async () => {
             await testingApi.doesRootSystemExists().then((res) => {
 
-              console.log(res);
+              // if(res === true)
+              // {
+              //   const info = userDataService.loadUser();
+
+              //   console.log(info);
+              //   console.log(isExpired(info.session));
+            
+                
+            
+              //   if(!info)
+              //   {
+              //     setLoggedIn(false);
+                  
+              //   }
+              //   else if(!!isExpired(info.session))
+              //   {
+              //     userDataService.clearUser();
+              //     redirect('/');
+              //   }
+              //   else{
+              //     navigate('/home')
+              //   }
+              // }
+
               if(res === false)
               {
                 Swal.fire(
@@ -98,23 +124,18 @@ function App() {
         )
       })
     }
-    async function testIfRootSystemExists() {
-      
-    }
 
-    testApi().then(() => {
-      testIfRootSystemExists();
-    })
+    testApi();
 
   }, [])
-
+  
   return (
     <Router>
       <ModalConfig showModal={showModal} setShowModal={setShowModal}/>
 
 
 
-      {(loggedIn) &&  <Sidebar/>}
+      {!userDataService.isSessionExpired() &&  <Sidebar/>}
       
       
       <Button style={{
