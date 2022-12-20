@@ -28,6 +28,11 @@ export default class UserDataService{
         return JSON.parse(localStorage.getItem('user'));
     }
 
+    getUserToken()
+    {
+        return this.loadUser().session.token;
+    }
+
     clearUser()
     {
         localStorage.removeItem('user');

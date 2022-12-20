@@ -18,6 +18,8 @@ import SystemApi from './Services/SystemApi';
 import Home from './Pages/Home';
 import Sidebar from './Components/Sidebar';
 import UserDataService from './Services/UserDataService';
+import SystemList from './Pages/SystemList';
+import SystemCreate from './Pages/SystemCreate';
 
 
 
@@ -150,6 +152,8 @@ function App() {
       <Routes id="routes">
         <Route path="/" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
         <Route path='/sign-up' element ={<SignUp/>}/>
+        <Route path='/list/systems' element={<SystemList/>}/>
+        <Route path='/create/systems' element={<SystemCreate/>}/>
         <Route path="/home" element={<Home/>}/>
       </Routes>
       

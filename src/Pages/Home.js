@@ -41,9 +41,9 @@ export default function Home() {
         <Container fluid>
         
             <Row className="" style={{backgroundColor: MainColors.primary, color: MainColors.fourth, height: "100%"}}>
-                <Col xl="3">
+                <Col md="3">
                 </Col>
-                <Col xl="6">
+                <Col md="6">
                     <h1>HOME</h1>
 
                     <Card style={{backgroundColor: MainColors.fourth, color: MainColors.primary, fontFamily: "consolas"}}>
@@ -88,7 +88,7 @@ export default function Home() {
                     </Card>
 
                 </Col>
-                <Col xl="3">
+                <Col md="3">
                 </Col>
 
                 

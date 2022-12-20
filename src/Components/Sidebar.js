@@ -33,12 +33,16 @@ export default function Sidebar(props) {
                 <OffcanvasBody>
                     <Row>
                         <Col>
-                            <Link>Home</Link>
+                            <Link to="/home">Home</Link>
                         </Col>
                     </Row>
+                    <hr></hr>
+
+                    <strong>Listas</strong>
+
                     <Row>
                         <Col>
-                            <Link>Sistemas</Link>
+                            <Link to="/list/systems">Sistemas</Link>
                         </Col>
                     </Row>
                     <Row>
@@ -54,6 +58,15 @@ export default function Sidebar(props) {
                     <Row>
                         <Col>
                             <Link>Sessões</Link>
+                        </Col>
+                    </Row>
+                    <hr></hr>
+
+                    <strong>Criar</strong>
+
+                    <Row>
+                        <Col>
+                            <Link to="/create/systems">Sistemas</Link>
                         </Col>
                     </Row>
 
