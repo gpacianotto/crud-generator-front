@@ -63,4 +63,23 @@ export default class SystemApi {
         return response;
     }
 
+    async listSystems(page) {
+        let response;
+
+        await axios.get(this.getApiURL() + '/systems/list?page=' + page, {
+            headers: {
+                "Content-Type" : "application/json",
+                "systemToken": this.config.getRootSystemToken(),
+                "token": this.userDataService.getUserToken()
+            }
+        }).then((res) => {
+            response = res?.data?.response?.rows;
+        }).catch((err) => {
+            response = err;
+        })
+
+        console.log(response);
+        return response;
+    }
+
 }

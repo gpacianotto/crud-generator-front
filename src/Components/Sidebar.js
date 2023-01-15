@@ -6,7 +6,11 @@ export default function Sidebar(props) {
 
     const [show, setShow] = useState(false);
     const userDataService = UserDataService.getInstance();
+    const user = userDataService.loadUser();
+    const role = user?.account?.role;
     const navigate = useNavigate();
+
+    console.log(user);
 
     return <>
     
@@ -40,21 +44,27 @@ export default function Sidebar(props) {
 
                     <strong>Listas</strong>
 
-                    <Row>
-                        <Col>
-                            <Link to="/list/systems">Sistemas</Link>
-                        </Col>
-                    </Row>
-                    <Row>
+                    {role === "root" &&
+                        <Row>
+                            <Col>
+                                <Link to="/list/systems">Sistemas</Link>
+                            </Col>
+                        </Row>
+                    }
+                    {(role === "root") &&
+                        <Row>
                         <Col>
                             <Link>Usuários</Link>
                         </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Link>Contas</Link>
-                        </Col>
-                    </Row>
+                        </Row>
+                    }
+                    {(role === "admin" ||role === "root") &&
+                        <Row>
+                            <Col>
+                                <Link to="/list/accounts">Contas</Link>
+                            </Col>
+                        </Row>
+                    }
                     <Row>
                         <Col>
                             <Link>Sessões</Link>

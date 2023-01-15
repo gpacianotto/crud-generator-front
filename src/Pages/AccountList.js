@@ -1,40 +1,38 @@
-import MainColors from "../Assets/Colors/MainColors"
-import { Row, Col, Container, Card, CardHeader, CardTitle, CardBody } from "reactstrap"
-import ListingTable from "../Components/ListingTable"
 import { useEffect, useState } from "react"
-import SystemApi from "../Services/SystemApi"
+import AccountApi from "../Services/AccountApi"
+import { Row, Col, Container, Card, CardHeader, CardTitle, CardBody } from "reactstrap"
+import MainColors from "../Assets/Colors/MainColors";
+import ListingTable from "../Components/ListingTable";
 
+export default function AccountList(props) {
 
-export default function SystemList(props) {
-    const systemApi = SystemApi.getInstance();
-    const [rows, setRows] = useState([]);
+    const accountsApi = AccountApi.getInstance();
     const [page, setPage] = useState(1);
-
+    const [rows, setRows] = useState([]);
+    
     useEffect(() => {
-        async function getRows(){
-            await systemApi.listSystems(page).then((res) => {
+        async function getRows() {
+            await accountsApi.listAccounts(page).then(res => {
                 setRows(res);
                 console.log(res);
-            })
+            });
         }
-
         getRows();
-    }, [page])
+    }, [])
 
     return <>
     
     <Container fluid>
-        
-        <Row className="" style={{backgroundColor: MainColors.primary, color: MainColors.fourth, height: "100Vh"}}>
+    <Row className="" style={{backgroundColor: MainColors.primary, color: MainColors.fourth, height: "100Vh"}}>
             <Col md="2">
             
             </Col>
             <Col md="8">
-                <h1 className="text-center" style={{color: MainColors.fourth}}>Lista de Sistemas</h1>
+                <h1 className="text-center" style={{color: MainColors.fourth}}>Lista de Contas</h1>
                 <Card style={{backgroundColor: MainColors.fourth, color: MainColors.primary, fontFamily: "consolas"}}>
                     <CardHeader>
                         <CardTitle>
-                            Sistemas
+                            Contas
                         </CardTitle>
                     </CardHeader>
                     <CardBody>

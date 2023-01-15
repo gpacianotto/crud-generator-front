@@ -24,6 +24,8 @@ export default function Login(props) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [childAccount, setChildAccount] = useState(false);
+    const [systemId, setSystemId] = useState();
     const signInApi = SignInApi.getInstance();
     const userDataService = UserDataService.getInstance();
 
@@ -104,6 +106,29 @@ export default function Login(props) {
                                 />
                             </FormGroup>
 
+                            <FormGroup check>
+                                <Input onChange={(e) => {setChildAccount(e.target.checked)}} type="checkbox" />
+                                {' '}
+                                <Label check>
+                                Logar como Administrador
+                                </Label>
+                            </FormGroup>
+
+                            { childAccount &&
+                                <FormGroup>
+                                    <Label for="systemId">
+                                    ID do Sistema:
+                                    </Label>
+                                    <Input
+                                    id="systemId"
+                                    name="email"
+                                    placeholder="ID do Sistema"
+                                    type="number"
+                                    onChange={(e) => {setSystemId(e.target.value)}}
+                                    />
+                                </FormGroup>
+                            }
+
                             <Row className="text-center">
                                 <Col>
                                     <Button  
@@ -113,9 +138,10 @@ export default function Login(props) {
 
                                         const data = {
                                             email: email,
-                                            password: password
+                                            password: password,
+                                            systemId: systemId
                                         }
-
+                                        console.log(data);
                                         await signInApi.login(data).then((response) => {
                                             if(response.status === "error")
                                             {  

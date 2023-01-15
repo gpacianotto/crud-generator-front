@@ -40,7 +40,7 @@ export default function Home() {
     
         <Container fluid>
         
-            <Row className="" style={{backgroundColor: MainColors.primary, color: MainColors.fourth, height: "100%"}}>
+            <Row className="" style={{backgroundColor: MainColors.primary, color: MainColors.fourth, height: "100vh"}}>
                 <Col md="3">
                 </Col>
                 <Col md="6">

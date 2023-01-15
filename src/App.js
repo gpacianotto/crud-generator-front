@@ -20,6 +20,7 @@ import Sidebar from './Components/Sidebar';
 import UserDataService from './Services/UserDataService';
 import SystemList from './Pages/SystemList';
 import SystemCreate from './Pages/SystemCreate';
+import AccountList from './Pages/AccountList';
 
 
 
@@ -153,6 +154,7 @@ function App() {
         <Route path="/" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
         <Route path='/sign-up' element ={<SignUp/>}/>
         <Route path='/list/systems' element={<SystemList/>}/>
+        <Route path='/list/accounts' element={<AccountList/>}/>
         <Route path='/create/systems' element={<SystemCreate/>}/>
         <Route path="/home" element={<Home/>}/>
       </Routes>
