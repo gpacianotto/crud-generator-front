@@ -74,11 +74,13 @@ export default function Sidebar(props) {
 
                     <strong>Criar</strong>
 
-                    <Row>
+                    {(role === "root") &&
+                        <Row>
                         <Col>
                             <Link to="/create/systems">Sistemas</Link>
                         </Col>
-                    </Row>
+                        </Row>
+                    }
 
                     <Row className='mt-3'>
                         <Col>
