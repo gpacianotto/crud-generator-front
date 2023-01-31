@@ -21,6 +21,8 @@ import UserDataService from './Services/UserDataService';
 import SystemList from './Pages/SystemList';
 import SystemCreate from './Pages/SystemCreate';
 import AccountList from './Pages/AccountList';
+import TableCreate from './Pages/TableCreate';
+import TableList from './Pages/TableList';
 
 
 
@@ -156,6 +158,8 @@ function App() {
         <Route path='/list/systems' element={<SystemList/>}/>
         <Route path='/list/accounts' element={<AccountList/>}/>
         <Route path='/create/systems' element={<SystemCreate/>}/>
+        <Route path='/create/tables' element={<TableCreate/>}/>
+        <Route path='list/tables' element={<TableList/>}/>
         <Route path="/home" element={<Home/>}/>
       </Routes>
       

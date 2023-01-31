@@ -28,7 +28,7 @@ export default function SystemCreate(props) {
 
                 <Card style={{backgroundColor: MainColors.fourth, color: MainColors.primary, fontFamily: "consolas"}}>
                     <CardHeader>
-                         de Sistema
+                        Dados do Novo Sistema
                     </CardHeader>
                     <CardBody>
                         <Form>

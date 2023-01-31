@@ -65,6 +65,14 @@ export default function Sidebar(props) {
                             </Col>
                         </Row>
                     }
+
+                    {(role === "admin") &&
+                        <Row>
+                            <Col>
+                                <Link to="/list/tables">Tabelas</Link>
+                            </Col>
+                        </Row>
+                    }
                     <Row>
                         <Col>
                             <Link>Sessões</Link>
@@ -78,6 +86,14 @@ export default function Sidebar(props) {
                         <Row>
                         <Col>
                             <Link to="/create/systems">Sistemas</Link>
+                        </Col>
+                        </Row>
+                    }
+
+                    {(role === "admin") &&
+                        <Row>
+                        <Col>
+                            <Link to="/create/tables">Tabela</Link>
                         </Col>
                         </Row>
                     }
