@@ -85,7 +85,13 @@ export default function TableCreate() {
 
                                                                     setCollumns(prev => {
                                                                         let newCol = [...prev];
-    
+                                                                        
+                                                                        if(e.target.value === "integer")
+                                                                        {
+                                                                            newCol[index].size.label = null;
+                                                                            newCol[index].size.value = null;
+                                                                        }
+
                                                                         newCol[index].type = e.target.value;
     
                                                                         return newCol

@@ -31,7 +31,7 @@ export default function TableList() {
     
         <Container fluid>
             
-            <Row className="" style={{backgroundColor: MainColors.primary, color: MainColors.fourth, height: "100Vh"}}>
+            <Row className="" style={{backgroundColor: MainColors.primary, color: MainColors.fourth, height: "100Vh", overflowY: "auto"}}>
                 <Col md="1">
                 
                 </Col>
@@ -65,7 +65,12 @@ export default function TableList() {
                                                         <hr/>
                                                     </>
                                                     )}
+                                                    <p className="m-0">Manipular Linhas</p>
                                                     <p className="m-0"><span style={{color: "#7ecf2b"}}>POST</span> /create/{table.tableId}</p>
+                                                    <p className="m-0"><span style={{color: "#a896f2"}}>GET</span> /read/{table.tableId}?pk={`{primaryKey}`}</p>
+                                                    <p className="m-0"><span style={{color: "#a896f2"}}>GET</span> /list/{table.tableId}</p>
+                                                    <p className="m-0"><span style={{color: "#df9a2a"}}>PUT</span> /update/{table.tableId}</p>
+                                                    <p className="m-0"><span style={{color: "#ff5631"}}>DELETE</span> /destroy/{table.tableId}</p>
 
                                                 </CardBody>
                                             </CardHeader>
