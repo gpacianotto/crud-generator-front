@@ -3,6 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
+  HashRouter,
   Routes,
   Route,
   Link,
@@ -135,7 +136,7 @@ function App() {
   }, [])
   
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <HashRouter>
       <ModalConfig showModal={showModal} setShowModal={setShowModal}/>
 
 
@@ -165,7 +166,7 @@ function App() {
       
       {/* <Route path="/regex" element={<Regex/>}/>
       <Route path="/grammar" element={<Grammar/>}></Route> */}
-    </Router>
+    </HashRouter>
   );
 }
 

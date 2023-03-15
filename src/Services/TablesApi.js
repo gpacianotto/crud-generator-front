@@ -60,5 +60,24 @@ export default class TablesApi {
         return response;
     }
 
+    async deleteTables(id)
+    {
+        let response;
+
+        await axios.delete(this.getApiURL() + '/table/delete/' + id, {
+            headers: {
+                "systemToken": this.config.getRootSystemToken(),
+                "token": this.userDataService.getUserToken()
+            }
+        }).then((res) => {
+            console.log("raw: ", res);
+            response = res?.data;
+        }).catch((err) => {
+            response = err
+        });
+
+        return response;
+    }
+
 
 }

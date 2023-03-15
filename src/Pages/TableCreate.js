@@ -119,6 +119,15 @@ export default function TableCreate() {
                                                                     id={"labelSize" + index} 
                                                                     type="select"
                                                                     value={collumn?.size?.label}
+                                                                    onChange={(e) => {
+                                                                        setCollumns(prev => {
+                                                                            let newCol = [...prev];
+
+                                                                            newCol[index].size.label = e.target.value;
+
+                                                                            return newCol;
+                                                                        })
+                                                                    }}
                                                                 >
                                                                     <option value="variable">
                                                                         Variável (VARCHAR)
@@ -137,6 +146,15 @@ export default function TableCreate() {
                                                                     type="number"
                                                                     min={1}
                                                                     max={65535}
+                                                                    onChange={(e) => {
+                                                                        setCollumns(prev => {
+                                                                            let newCol = [...prev];
+
+                                                                            newCol[index].size.value = e.target.value;
+
+                                                                            return newCol;
+                                                                        })
+                                                                    }}
                                                                 >
                                                                     
                                                                 </Input>
