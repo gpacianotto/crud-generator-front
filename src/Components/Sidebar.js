@@ -51,13 +51,13 @@ export default function Sidebar(props) {
                             </Col>
                         </Row>
                     }
-                    {(role === "root") &&
+                    {/* {(role === "root") &&
                         <Row>
                         <Col>
                             <Link>Usuários</Link>
                         </Col>
                         </Row>
-                    }
+                    } */}
                     {(role === "admin" ||role === "root") &&
                         <Row>
                             <Col>
@@ -73,11 +73,11 @@ export default function Sidebar(props) {
                             </Col>
                         </Row>
                     }
-                    <Row>
+                    {/* <Row>
                         <Col>
                             <Link>Sessões</Link>
                         </Col>
-                    </Row>
+                    </Row> */}
                     <hr></hr>
 
                     <strong>Criar</strong>
