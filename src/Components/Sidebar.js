@@ -104,7 +104,7 @@ export default function Sidebar(props) {
                             style={{width: "100%"}}
                             onClick={() => {
                                 userDataService.clearUser();
-                                window.history.go();
+                                navigate("/")
                             }}
                             >
                                 LogOut

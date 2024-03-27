@@ -8,7 +8,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import { Row, Col, Button } from 'reactstrap';
+import { Row, Col, Button, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import { useEffect, useState } from 'react';
@@ -31,12 +31,15 @@ import TableList from './Pages/TableList';
 function App() {
   const [showModal, setShowModal] = useState(false);
   const [loggedIn, setLoggedIn] = useState();
+  const [popover, setPopover] = useState(false);
 
   const systemApi = SystemApi.getInstance();
   const testingApi = TestingApi.getInstance();
   const userDataService = UserDataService.getInstance();
 
   useEffect(()=> {
+
+    setInterval(() => setPopover(true), 1200000)
 
     async function testApi() {
       await testingApi.isApiOn().then((res) => {
@@ -153,6 +156,38 @@ function App() {
       >
         Config
       </Button>
+      <Button
+        id='helpUs'
+        style={{
+          position: "fixed",
+          top: "2%",
+          right: "2%",
+        }}
+      >
+        Ajude-nos
+      </Button>
+      <Popover target="helpUs"  isOpen={popover} toggle={() => setPopover(!popover)}>
+        <PopoverHeader>
+          Ajude-nos!
+        </PopoverHeader>
+        <PopoverBody>
+          Crud Generator é um trabalho de conclusão de curso de um aluno da graduação em Ciência da Computação. Ajude-o a concluir o trabalho nos fornecendo seu feedback sobre a ferramenta.
+          <Row className='mt-2'>
+            <Col>
+              <Button color='success'>
+                Claro!
+              </Button>
+            </Col>
+            <Col>
+              <Button color='primary' onClick={() => {setPopover(!popover)}}>
+                Mais tarde!
+              </Button>
+            </Col>
+          </Row>
+          
+          
+        </PopoverBody>
+      </Popover>
       <Routes id="routes">
         <Route path="/" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
         <Route path='/sign-up' element ={<SignUp/>}/>
