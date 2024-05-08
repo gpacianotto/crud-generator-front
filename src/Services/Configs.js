@@ -16,12 +16,12 @@ export default class Configs{
 
     getServerURL()
     {
-        return this.serverURL;
+        return localStorage.getItem('serverURL');
     }
 
     setServerURL(url)
     {
-        this.serverURL = url;
+        localStorage.setItem('serverURL', url);
     }
 
     getRootSystemToken()
