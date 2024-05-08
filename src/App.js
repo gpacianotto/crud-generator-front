@@ -24,6 +24,7 @@ import SystemCreate from './Pages/SystemCreate';
 import AccountList from './Pages/AccountList';
 import TableCreate from './Pages/TableCreate';
 import TableList from './Pages/TableList';
+import HelpUs from './Pages/HelpUs';
 
 
 
@@ -119,7 +120,7 @@ function App() {
         {
           Swal.fire(
             'Erro',
-            'Servidor Não conectado!, para conectar seu servidor rode o comando "node app.js"',
+            'Servidor Não conectado! Para conectar seu servidor rode o comando "node app.js"',
             'error'
           )
         }
@@ -174,9 +175,14 @@ function App() {
           Crud Generator é um trabalho de conclusão de curso de um aluno da graduação em Ciência da Computação. Ajude-o a concluir o trabalho nos fornecendo seu feedback sobre a ferramenta.
           <Row className='mt-2'>
             <Col>
-              <Button color='success'>
-                Claro!
-              </Button>
+              <Link to={"/help-us"}>
+                <Button 
+                  onClick={() => {setPopover(!popover)}}
+                  color='success'
+                >
+                  Claro!
+                </Button>
+              </Link>
             </Col>
             <Col>
               <Button color='primary' onClick={() => {setPopover(!popover)}}>
@@ -197,6 +203,7 @@ function App() {
         <Route path='/create/tables' element={<TableCreate/>}/>
         <Route path='list/tables' element={<TableList/>}/>
         <Route path="/home" element={<Home/>}/>
+        <Route path='/help-us' element={<HelpUs/>}/>
       </Routes>
       
       {/* <Route path="/regex" element={<Regex/>}/>
