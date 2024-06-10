@@ -175,14 +175,14 @@ function App() {
           Crud Generator é um trabalho de conclusão de curso de um aluno da graduação em Ciência da Computação. Ajude-o a concluir o trabalho nos fornecendo seu feedback sobre a ferramenta.
           <Row className='mt-2'>
             <Col>
-              <Link to={"/help-us"}>
+              <a target='_blank' href='https://forms.gle/BC2cfKV2r1zz94Ys9'>
                 <Button 
                   onClick={() => {setPopover(!popover)}}
                   color='success'
                 >
                   Claro!
                 </Button>
-              </Link>
+              </a>
             </Col>
             <Col>
               <Button color='primary' onClick={() => {setPopover(!popover)}}>
